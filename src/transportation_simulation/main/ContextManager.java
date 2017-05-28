@@ -19,7 +19,7 @@ import repast.simphony.space.grid.WrapAroundBorders;
 import transportation_simulation.agent.IAgent;
 import transportation_simulation.agent.DefaultAgent;
 import transportation_simulation.environment.Building;
-import transportation_simulation.environment.contexts.BuildingContext;
+import transportation_simulation.contexts.BuildingContext;
 
 public class ContextManager implements ContextBuilder<Object> {
 

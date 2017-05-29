@@ -93,7 +93,7 @@ public class DefaultAgent implements IAgent{
 	}
 
 	/**
-	 * There will be no inter-agent communication so these agents can be executed simulataneously in separate threads.
+	 * There will be no inter-agent communication so these agents can be executed simultaneously in separate threads.
 	 */
 	@Override
 	public boolean isThreadable() {

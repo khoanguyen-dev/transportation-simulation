@@ -19,6 +19,7 @@ import repast.simphony.space.grid.WrapAroundBorders;
 import transportation_simulation.agent.IAgent;
 import transportation_simulation.agent.DefaultAgent;
 import transportation_simulation.environment.Building;
+import transportation_simulation.contexts.AgentContext;
 import transportation_simulation.contexts.BuildingContext;
 
 public class ContextManager implements ContextBuilder<Object> {
@@ -47,7 +48,7 @@ public class ContextManager implements ContextBuilder<Object> {
 	}
 
 	@Override
-	public Context build(Context<Object> context) {
+	public Context<Object> build(Context<Object> context) {
 		
 		// Keep a useful static link to the main context
 		mainContext = context;
@@ -68,14 +69,19 @@ public class ContextManager implements ContextBuilder<Object> {
 		
 		int buildingCount = 5;
 		for (int i = 0; i < buildingCount; i++) {
+			Building b = new Building(space, grid);
+			b.setIdentifier(Integer.toString(i));
 			buildingContext.add(new Building(space, grid));
 		}
 		
 		mainContext.addSubContext(buildingContext);
 		
+		agentContext = new AgentContext();
+		
 		int agentCount = 50;
 		for (int i = 0; i < agentCount; i++) {
 			DefaultAgent agent = new DefaultAgent(space, grid);
+			agentContext.add(agent);
 			agent.setHome(buildingContext.getRandomObject());
 			context.add(agent);
 		}

@@ -2,14 +2,18 @@ package transportation_simulation.environment;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import com.vividsolutions.jts.geom.Coordinate;
 
 import repast.simphony.space.continuous.ContinuousSpace;
 import repast.simphony.space.grid.Grid;
-import transportation_simulation.agent.IAgent;;
+import transportation_simulation.agent.IAgent;
+import transportation_simulation.exceptions.NoIdentifierException;;
 
-public class Building {
+public class Building implements FixedGeography, Identified {
+	
+	private static Logger LOGGER = Logger.getLogger(Building.class.getName());
 	
 	/** TODO: Change to coordinate system */
 	private ContinuousSpace<Object> space;
@@ -34,15 +38,18 @@ public class Building {
 		this.agents = new ArrayList<IAgent>();
 	}
 	
+	/** TODO: Change to coordinate system */
 	public Building(ContinuousSpace<Object> space, Grid<Object> grid) {
 		this.space = space;
 		this.grid = grid;
 	}
 	
+	@Override
 	public Coordinate getCoords() {
 		return this.coords;
 	}
 	
+	@Override
 	public void setCoords(Coordinate c) {
 		this.coords = c;
 	}
@@ -63,9 +70,9 @@ public class Building {
 		return grid;
 	}
 	
-	public String getIdentifier() throws Exception {
+	public String getIdentifier() throws NoIdentifierException {
 		if (this.identifier == null) {
-			throw new Exception("This building has no identifier. This can happen "
+			throw new NoIdentifierException("This building has no identifier. This can happen "
 					+ "when roads are not initialised correctly (e.g. there is no attribute "
 					+ "called 'identifier' present in the shapefile used to create this Road)");
 		} else {
@@ -104,10 +111,11 @@ public class Building {
 	@Override
 	public int hashCode() {
 		if (this.identifier==null) {
-			//TODO: Implement logger
+			LOGGER.severe("hashCode called but this object's identifier has not been set. It is likely that you're " +
+					"reading a shapefile that doesn't have a string column called 'identifier'");
 		}
-
 		return this.identifier.hashCode();
 	}
-	*/
+	 */
+	
 }

@@ -33,8 +33,13 @@ public class Route {
 		return pt.equals(agent.getGrid().getLocation(agent));
 		//return ContextManager.getAgentGeometry(this.agent).getCoordinate().equals(this.destination);
 	}
+	
+	public Building getDestinationBuilding() {
+		return this.destinationBuilding;
+	}
 
 	public void travel() {
+		destinationBuilding.removeAgent(agent);
 		GridPoint pt = destinationBuilding.getGrid().getLocation(destinationBuilding);
 		ContinuousSpace<Object> space = agent.getSpace();
 		if (!pt.equals(agent.getGrid().getLocation(agent))) {

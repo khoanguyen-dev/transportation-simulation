@@ -40,6 +40,7 @@ public class Building implements FixedGeography, Identified {
 	
 	/** TODO: Change to coordinate system */
 	public Building(ContinuousSpace<Object> space, Grid<Object> grid) {
+		this.agents = new ArrayList<IAgent>();
 		this.space = space;
 		this.grid = grid;
 	}
@@ -88,6 +89,10 @@ public class Building implements FixedGeography, Identified {
 		this.agents.add(a);
 	}
 	
+	public void removeAgent(IAgent a) {
+		this.agents.remove(a);
+	}
+	
 	public List<IAgent> getAgents() {
 		return this.agents;
 	}
@@ -103,6 +108,13 @@ public class Building implements FixedGeography, Identified {
 			return false;
 		Building b = (Building) obj;
 		return this.identifier.equals(b.identifier);
+	}
+	
+	public int countAgents() {
+		if (agents != null) {
+			return agents.size();
+		}
+		return 0;
 	}
 	
 	/**

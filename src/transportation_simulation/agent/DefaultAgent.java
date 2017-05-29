@@ -44,6 +44,7 @@ public class DefaultAgent implements IAgent{
 			this.route.travel();
 		} else {
 			// Have reached destination, now either go home or onto another building
+			this.route.getDestinationBuilding().addAgent(this);
 			if (this.goingHome) {
 				this.goingHome = false;
 				Building b = ContextManager.buildingContext.getRandomObject();

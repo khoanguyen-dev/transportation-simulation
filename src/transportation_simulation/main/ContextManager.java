@@ -82,14 +82,17 @@ public class ContextManager implements ContextBuilder<Object> {
 		for (int i = 0; i < agentCount; i++) {
 			DefaultAgent agent = new DefaultAgent(space, grid);
 			agentContext.add(agent);
-			agent.setHome(buildingContext.getRandomObject());
-			context.add(agent);
+			Building b = buildingContext.getRandomObject();
+			agent.setHome(b);
+			b.addAgent(agent);
+			agentContext.add(agent);
 		}
-		
 		for (Object obj : context) {
 			NdPoint pt = space.getLocation(obj);
 			grid.moveTo(obj, (int) pt.getX(), (int) pt.getY());
 		}
+		
+		mainContext.addSubContext(agentContext);
 		
 		return mainContext;
 	}

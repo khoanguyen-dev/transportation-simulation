@@ -44,6 +44,7 @@ public class DefaultAgent implements IAgent{
 			this.route.travel();
 		} else {
 			// Have reached destination, now either go home or onto another building
+			this.route.getDestinationBuilding().removeAgent(this);
 			this.route.getDestinationBuilding().addAgent(this);
 			if (this.goingHome) {
 				this.goingHome = false;
@@ -57,10 +58,12 @@ public class DefaultAgent implements IAgent{
 		}
 	}
 
+	// TODO: change to coordinate system
 	public Grid<Object> getGrid() {
 		return grid;
 	}
 	
+	// TODO: change to coordinate system
 	public ContinuousSpace<Object> getSpace() {
 		return space;
 	}

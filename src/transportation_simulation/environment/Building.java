@@ -119,7 +119,7 @@ public class Building implements FixedGeography, Identified {
 	
 	/**
 	 * Returns the hash code of this <code>Building</code>'s identifier string. 
-	 
+	 */
 	@Override
 	public int hashCode() {
 		if (this.identifier==null) {
@@ -128,6 +128,6 @@ public class Building implements FixedGeography, Identified {
 		}
 		return this.identifier.hashCode();
 	}
-	 */
+	 
 	
 }
